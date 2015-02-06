@@ -9,15 +9,11 @@ making route handling and UI refreshes more efficient
 -->
 <template name="layout">
   <div class="container">
-
-    <header class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">Microscope</a>
-      </div>
-    </header>
+  	
+  	{{> header}}
 
     <div id="main" class="row-fluid">
-	{{> yield}}
+		{{> yield}}
     </div>
 
   </div>
