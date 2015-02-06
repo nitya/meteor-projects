@@ -1,0 +1,24 @@
+<!-- 5.1 
+The default 'layout' frame declared for Iron Router usage
+Note that the {{> yield}} section is dynamically replaced by a
+route-specific template (as configured in Router.js)
+
+This allows the header and other chrome on the layout template to
+remain consistent across routes - only the yield area is replaced
+making route handling and UI refreshes more efficient
+-->
+<template name="layout">
+  <div class="container">
+
+    <header class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Microscope</a>
+      </div>
+    </header>
+
+    <div id="main" class="row-fluid">
+	{{> yield}}
+    </div>
+
+  </div>
+</template>
