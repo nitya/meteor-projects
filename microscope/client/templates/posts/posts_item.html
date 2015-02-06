@@ -17,6 +17,14 @@
 	the _id is expected to be provided by the associated data context
 	Because the posts data here comes from a collection (MongoDB) they have
 	the built-in _id which maps perfectly onto the required route param
+
+	You can also pass a second argument to this pathFor expression, which 
+	provides a location where an _id is to be found. This allows you to also
+	create links dynamically where the _id is retrieved from a different 
+	function, helper or context that you specify explicitly
+		e.g., {{pathFor 'postPage' alternateContextObj }}
+	where alternateContextObj contains an _id property, and is associated
+	with the template helper for this postItem template.
 -->
 <template name="postItem">
 

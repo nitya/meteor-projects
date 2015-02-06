@@ -19,10 +19,12 @@
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
+	notFoundTemplate: 'notFound',
 	waitOn: function(){
 		return Meteor.subscribe('posts');
 	}		
 });
+
 
 // Router.route sets per-route properties
 // Why name routes? Because it lets us use the associated URLs for
@@ -33,7 +35,8 @@ Router.route('/',
 	{ name: 'postsList'}
 );
 
-// 5.3 the "_id" parameter is now available in the 'params' array
+// 5.3 
+// the "_id" parameter is now available in the 'params' array
 // associated with the router. Also note that 'data' is a reserved
 // word that effectively sets the data context for the associated 
 // template rendered against this route.
@@ -55,3 +58,15 @@ Router.route('/posts/:_id',{
 		data: function() { return Posts.findOne(this.params._id); }
 	}
 );
+
+// 5.4
+// What happens if a route is valid (i.e., in form /posts/xyz) but the data
+// context is not (i.e., no post with id=xyz exists)
+// Currently this won't show a 404 - rather, it will show an invalid page
+// template rendering, or throw an exception. We actually want it to show a 
+// 404 (effectively telling client this page does not exist)
+// 
+// How do you map invalid data context onto 404 errors? Use the 'dataNotFound'
+// hook below to indicate that, for THAT route, show 404 if data does not exist
+Router.onBeforeAction('dataNotFound', {only: 'postPage'});
+
