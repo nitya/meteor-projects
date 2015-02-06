@@ -1,4 +1,5 @@
-<!-- 3.1 
+<!-- 
+	3.1 
 	Item template expects to see a bound data context that contains
 	{url, title, domain} properties
 
@@ -9,6 +10,13 @@
 	ergo: ensure that 'posts' bound to postsList template has items
 	that support the required properties directly
 	(note that in this case 'domain' is not defined, hence empty in view)
+
+	5.3
+	Added pathFor to dynamically link each post to a post-specific page
+	for discussions. Note that Router resolves this to "/post/:_id" where
+	the _id is expected to be provided by the associated data context
+	Because the posts data here comes from a collection (MongoDB) they have
+	the built-in _id which maps perfectly onto the required route param
 -->
 <template name="postItem">
 
@@ -19,6 +27,9 @@
       	<span>{{domain}}</span>
       </h3>
     </div>
+    <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">
+    	Discuss
+    </a>
   </div>
 
 </template>
