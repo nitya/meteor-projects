@@ -14,8 +14,14 @@
 */
 
 // Router.configure sets GLOBAL context, properties
+// waitOn ensures that the function specified completes before the route
+//  renders. in the meantime, a 'loading' template is shown
 Router.configure({
-	layoutTemplate: 'layout'		
+	layoutTemplate: 'layout',
+	loadingTemplate: 'loading',
+	waitOn: function(){
+		return Meteor.subscribe('posts');
+	}		
 });
 
 // Router.route sets per-route properties
