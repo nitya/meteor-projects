@@ -1,3 +1,4 @@
+// 4-2: Initialize collection with data for testing
 if (Posts.find().count() === 0) { 
 	Posts.insert({
 	    title: 'Introducing Telescope',
