@@ -1,21 +1,11 @@
-// 3.1 Fixture data for initializing posts
-var postsData = [ 
-  {
-    title: 'Introducing Telescope',
-    url: 'http://sachagreif.com/introducing-telescope/'
-  },
-  {
-    title: 'Meteor',
-    url: 'http://meteor.com'
-  }, 
-  {
-    title: 'The Meteor Book',
-    url: 'http://themeteorbook.com'
-  }
-];
-
 
 // 3.1 postsList template helper binds data to view variables
+//
+// 4.3 replaced the static data with a dyanmic database query
+//     note that find() returns a cursor = reactive data source
+//      if you want to get static data, add .fetch()
 Template.postsList.helpers({
-  posts: postsData
+  posts: function(){
+    return Posts.find();
+  }
 });
