@@ -1,0 +1,18 @@
+<!-- 3.1 
+	List template stamps out an instance of item template
+ 	for each data item in the 'posts' data array provided by
+ 	its helper
+
+ 	Note that in a given loop iteration, that associated data
+ 	is available as the default "this" data context within the
+ 	postItem template handler
+-->
+<template name="postsList">
+
+  <div class="posts">
+    {{#each posts}}
+      {{> postItem}}
+	{{/each}}
+  </div>
+
+</template>

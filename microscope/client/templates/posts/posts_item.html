@@ -1,0 +1,24 @@
+<!-- 3.1 
+	Item template expects to see a bound data context that contains
+	{url, title, domain} properties
+
+	Because this is invoked from the loop in postList, the data context
+	is effectively bound to the specific data item passed down in 
+	that specific iteration
+
+	ergo: ensure that 'posts' bound to postsList template has items
+	that support the required properties directly
+	(note that in this case 'domain' is not defined, hence empty in view)
+-->
+<template name="postItem">
+
+  <div class="post">
+    <div class="post-content">
+      <h3>
+      	<a href="{{url}}">{{title}}</a>
+      	<span>{{domain}}</span>
+      </h3>
+    </div>
+  </div>
+
+</template>
