@@ -11,6 +11,10 @@
 *	templates = view to render for route (default = route name itself)
 *	layouts = container frame used for route (manages view templates)
 * 	controllers = common routing logic, parameters abstracted for reuse
+*
+* Keep in mind that routing hooks are reactive. i.e., the associated
+* function/state changes, the hook automatically re-executes and 
+* renders an updated route/page.
 */
 
 // 7.3 This named function can now be called in the onBeforeAction
