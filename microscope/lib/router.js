@@ -21,7 +21,11 @@
 //  hook (gets executed before the related route is taken)
 var requireLogin = function(){
 	if (! Meteor.user()){
-		this.render('accessDenied');
+		// 7.4 Modify hook to show loading template while the
+		//  user login credentials are being checked on server
+		//  (prevents flashing between valid and access denied screensxs)
+		if (Meteor.loggingIn()){ this.render(this.loadingTemplate); }
+		else {this.render('accessDenied');}
 	}
 	else {
 		this.next();

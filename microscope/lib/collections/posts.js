@@ -14,6 +14,12 @@ Posts.allow({
 // Note that we are using check methods to validate data
 // Also note that Meteor.methods execute on server, so they
 // can direcly call CRUD methods on collections (no deny,allow)
+//
+// Note that since methods are defined in a shared space, they can
+// run in parallel on client and server (latency compensation) where
+// the client side "fakes" the related database calls on the client side
+// cache, and can show updated UI -- but server side commits and then
+// confirms client change (else rolls it back)
 Meteor.methods({
 	postInsert: function(postAttributes){
 
@@ -25,6 +31,15 @@ Meteor.methods({
 			title:String, 
 			url:String
 		});
+
+		// 7.8 testing for latency compensation
+		if (Meteor.isServer) { 
+			postAttributes.title += "(server)"; // wait for 5 seconds 
+			Meteor._sleepForMs(5000);
+		} 
+		else {
+			postAttributes.title += "(client)";
+		}
 
 		// 7.7 check for duplicate data
 		//  Note how returned object can now carry attributes that 
@@ -49,6 +64,5 @@ Meteor.methods({
 		// insert object into collection on server
 		var postId = Posts.insert(post);
 		return {_id: postId};
-
-	};
+	}
 });
