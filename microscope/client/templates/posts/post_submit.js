@@ -15,8 +15,15 @@ Template.postSubmit.events({
 		// Methods are server-side functions called from client
 		// (callbacks return error or success status)
 		Meteor.call('postInsert', post, function(error, result){
-			if (error)	// display error to the user and abort
+			// display error to the user and abort
+			if (error)	
 				return alert(error.reason);
+
+			// 7.7 Now we can check for duplicate entry
+			if (result.postExists)
+				alert('This link has already been posted');
+
+			// If new or duplicate, show page for that entry
       		Router.go('postPage', {_id: result._id});
       	});
 

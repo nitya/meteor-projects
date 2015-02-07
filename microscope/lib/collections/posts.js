@@ -12,6 +12,8 @@ Posts.allow({
 
 // 7.6 Declare postInsert method
 // Note that we are using check methods to validate data
+// Also note that Meteor.methods execute on server, so they
+// can direcly call CRUD methods on collections (no deny,allow)
 Meteor.methods({
 	postInsert: function(postAttributes){
 
@@ -24,7 +26,20 @@ Meteor.methods({
 			url:String
 		});
 
+		// 7.7 check for duplicate data
+		//  Note how returned object can now carry attributes that 
+		//  don't exist in the collection but are created on the fly
+		//  e.g., here postExists: true
+		var postWithSameLink = Posts.findOne({url: postAttributes.url}); 
+		if (postWithSameLink) {
+			return {
+				postExists: true,
+				_id: postWithSameLink._id
+			};
+		}
+
 		// extend input attributes with user info
+		var user = Meteor.user();
 		var post = _.extend(postAttributes, {
 			userId: user._id,
 			author: user.username,
