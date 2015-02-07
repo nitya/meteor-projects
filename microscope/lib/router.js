@@ -93,6 +93,14 @@ Router.route('/posts/:_id',
 	}
 );
 
+// 8.1 Editing Posts
+Router.route('/posts/:_id/edit', 
+	{
+		name: 'postEdit',
+		data: function() { return Posts.findOne(this.params._id); }
+	}
+);
+
 // 7.1 
 Router.route('/submit', 
 	{ name: 'postSubmit' }

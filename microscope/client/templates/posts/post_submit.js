@@ -22,11 +22,10 @@ Template.postSubmit.events({
 			// 7.7 Now we can check for duplicate entry
 			if (result.postExists)
 				alert('This link has already been posted');
-      	});
 
-		// 7.5.1 Taken out of .call loop to show Latency Comp.
-		// If new or duplicate, show page for that entry
-  		Router.go('postsList');
+			// If new or duplicate, show page for that entry
+      		Router.go('postPage', {_id: result._id});
+      	});
 
 		/* -- replaced in 7.6 above
 		// Once inserted, then route to details page

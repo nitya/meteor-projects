@@ -25,6 +25,9 @@
 		e.g., {{pathFor 'postPage' alternateContextObj }}
 	where alternateContextObj contains an _id property, and is associated
 	with the template helper for this postItem template.
+
+	8.1
+	Add links to edit
 -->
 <template name="postItem">
 
@@ -34,7 +37,12 @@
       	<a href="{{url}}">{{title}}</a>
       	<span>{{domain}}</span>
       </h3>
+      <p>
+        submitted by {{author}}
+        {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit</a>{{/if}}
+      </p>
     </div>
+
     <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">
     	Discuss
     </a>

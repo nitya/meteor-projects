@@ -32,15 +32,6 @@ Meteor.methods({
 			url:String
 		});
 
-		// 7.8 testing for latency compensation
-		if (Meteor.isServer) { 
-			postAttributes.title += "(server)"; // wait for 5 seconds 
-			Meteor._sleepForMs(5000);
-		} 
-		else {
-			postAttributes.title += "(client)";
-		}
-
 		// 7.7 check for duplicate data
 		//  Note how returned object can now carry attributes that 
 		//  don't exist in the collection but are created on the fly
