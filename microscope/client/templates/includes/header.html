@@ -22,7 +22,10 @@
 
         <!-- 7.1 Add submit post option -->
         <ul class="nav navbar-nav">
-          <li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
+          <!-- 7.5 Hide if not logged in -->
+          {{#if currentUser}}
+            <li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
+          {{/if}}
         </ul>
 
         <!-- 6.1 use {{> loginButtons align="right"}} to drop right -->
