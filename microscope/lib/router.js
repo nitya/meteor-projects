@@ -26,6 +26,18 @@ Router.configure({
 });
 
 
+// 5.4
+// What happens if a route is valid (i.e., in form /posts/xyz) but the data
+// context is not (i.e., no post with id=xyz exists)
+// Currently this won't show a 404 - rather, it will show an invalid page
+// template rendering, or throw an exception. We actually want it to show a 
+// 404 (effectively telling client this page does not exist)
+// 
+// How do you map invalid data context onto 404 errors? Use the 'dataNotFound'
+// hook below to indicate that, for THAT route, show 404 if data does not exist
+Router.onBeforeAction('dataNotFound', {only: 'postPage'});
+
+
 // Router.route sets per-route properties
 // Why name routes? Because it lets us use the associated URLs for
 // building or referencing dynamic links later using 'pathFor'
@@ -53,20 +65,15 @@ Router.route('/',
 //      4. Or just pass it directly as a paramter to template call e.g.,
 //				{{> postPage myPostData}}
 //
-Router.route('/posts/:_id',{ 
+Router.route('/posts/:_id',
+	{ 
 		name: 'postPage',
 		data: function() { return Posts.findOne(this.params._id); }
 	}
 );
 
-// 5.4
-// What happens if a route is valid (i.e., in form /posts/xyz) but the data
-// context is not (i.e., no post with id=xyz exists)
-// Currently this won't show a 404 - rather, it will show an invalid page
-// template rendering, or throw an exception. We actually want it to show a 
-// 404 (effectively telling client this page does not exist)
-// 
-// How do you map invalid data context onto 404 errors? Use the 'dataNotFound'
-// hook below to indicate that, for THAT route, show 404 if data does not exist
-Router.onBeforeAction('dataNotFound', {only: 'postPage'});
+// 7.1 
+Router.route('/submit', 
+	{ name: 'postSubmit' }
+);
 

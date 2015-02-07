@@ -2,6 +2,7 @@
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
 
+    <!-- NAVIGATION COLLAPSIBLE HEADER -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" 
                 data-toggle="collapse" 
@@ -16,10 +17,15 @@
         </a>
       </div>
 
-      <!-- 6.1 
-        use {{> loginButtons align="right"}} to align drop side 
-      -->
+    <!-- NAVIGATION BAR CONTENTS -->
       <div class="collapse navbar-collapse" id="navigation">
+
+        <!-- 7.1 Add submit post option -->
+        <ul class="nav navbar-nav">
+          <li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
+        </ul>
+
+        <!-- 6.1 use {{> loginButtons align="right"}} to drop right -->
         <ul class="nav navbar-nav navbar-right">
           {{> loginButtons}}
         </ul> 

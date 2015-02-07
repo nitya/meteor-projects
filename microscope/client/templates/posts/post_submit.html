@@ -1,0 +1,29 @@
+<!-- 7.1 
+Form to submit posts
+-->
+<template name="postSubmit">
+
+  <form class="main form">
+    <!-- URL entry -->
+    <div class="form-group">
+      <label class="control-label" for="url">URL</label>
+      <div class="controls">
+          <input name="url" id="url" type="text" value="" 
+          placeholder="Your URL" class="form-control"/>
+      </div>
+    </div>
+
+    <!-- Title entry -->
+    <div class="form-group">
+      <label class="control-label" for="title">Title</label>
+      <div class="controls">
+          <input name="title" id="title" type="text" value="" 
+            placeholder="Name your post" class="form-control"/>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+  </form>
+
+</template>
