@@ -13,6 +13,18 @@
 * 	controllers = common routing logic, parameters abstracted for reuse
 */
 
+// 7.3 This named function can now be called in the onBeforeAction
+//  hook (gets executed before the related route is taken)
+var requireLogin = function(){
+	if (! Meteor.user()){
+		this.render('accessDenied');
+	}
+	else {
+		this.next();
+	}
+};
+
+
 // Router.configure sets GLOBAL context, properties
 // waitOn ensures that the function specified completes before the route
 //  renders. in the meantime, a 'loading' template is shown
@@ -36,6 +48,7 @@ Router.configure({
 // How do you map invalid data context onto 404 errors? Use the 'dataNotFound'
 // hook below to indicate that, for THAT route, show 404 if data does not exist
 Router.onBeforeAction('dataNotFound', {only: 'postPage'});
+Router.onBeforeAction(requireLogin, {only: 'postSubmit'});
 
 
 // Router.route sets per-route properties

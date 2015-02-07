@@ -4,7 +4,8 @@ Posts = new Mongo.Collection('posts');
 // 7.2 Remove 'insecure', add explict security rules
 Posts.allow({
 	insert: function(userId, doc){
-		// only allow posting if you are logged in
+		// only allow posting if you are logged in 
+		// (checks that userId is not null)
 		return !! userId;
 	}
 });
