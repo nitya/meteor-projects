@@ -1,4 +1,5 @@
-<!-- 5.1 
+<!-- 
+5.1 
 The default 'layout' frame declared for Iron Router usage
 Note that the {{> yield}} section is dynamically replaced by a
 route-specific template (as configured in Router.js)
@@ -6,11 +7,15 @@ route-specific template (as configured in Router.js)
 This allows the header and other chrome on the layout template to
 remain consistent across routes - only the yield area is replaced
 making route handling and UI refreshes more efficient
+
+9.1
+Add in template for displaying errors
 -->
 <template name="layout">
   <div class="container">
   	
   	{{> header}}
+  	{{> errors}}
 
     <div id="main" class="row-fluid">
 		{{> yield}}

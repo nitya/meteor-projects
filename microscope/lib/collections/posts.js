@@ -1,9 +1,28 @@
 // 4.1 Adding collections (but in insecure, autopublish mode)
 Posts = new Mongo.Collection('posts');
 
+// Note that its possible to allow some methods to happen
+// on client (with appropriate allow/deny rules to limit
+// their usage) while other methods are achieved using 
+// server-side Method.call invocations.
+//
+// Its easier/simpler to allow direct client manipulation
+// of data (vs. server-side methods) -- but use the latter
+// when you need centralized functions (e.g., timestamps)
+// or if functionality should be outside user control.
+//
+// However, note that Method calls are synchronous (you
+// get result callback) whereas client-side direct DB calls
+// will have to wait for reactivity/sync to complete
+// Read: 
+// https://www.discovermeteor.com/blog/meteor-methods-client-side-operations/
+
 // Note that when a call is made on a collection, it can go
-// forward only if any matching 'allow' calls return true
-// AND any matching 'deny' calls return false
+// forward only if at least one matching 'allow' calls returns 
+// true AND no matching 'deny' calls return false. Deny rules are
+// ALL run and tested first; if none block then allow rules are run
+// and tested in order -- the first to pass causes operation to then
+// be committed.
 
 // 7.2 Remove 'insecure', add explict security rules
 //     Once server insert exists, don't allow insert here

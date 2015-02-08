@@ -1,0 +1,21 @@
+<!-- 9.1
+Error templates follow a standard pattern of having two
+templates, one for a list and the other for details view
+The effect is to show a list of error alerts
+-->
+<template name="errors">
+  <div class="errors">
+    {{#each errors}}
+      {{> error}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="error">
+  <div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+    	&times;
+    </button>
+	{{message}}
+  </div>
+</template>
