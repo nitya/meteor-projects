@@ -14,14 +14,16 @@ Template.postSubmit.events({
 		// call if the insert requires additional processing
 		// Methods are server-side functions called from client
 		// (callbacks return error or success status)
+		//
+		// 9.2 update to use throwError instead of alert
 		Meteor.call('postInsert', post, function(error, result){
 			// display error to the user and abort
 			if (error)	
-				return alert(error.reason);
+				return throwError(error.reason);
 
 			// 7.7 Now we can check for duplicate entry
 			if (result.postExists)
-				alert('This link has already been posted');
+				throwError('This link has already been posted');
 
 			// If new or duplicate, show page for that entry
       		Router.go('postPage', {_id: result._id});
