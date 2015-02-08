@@ -2,11 +2,14 @@
 Posts = new Mongo.Collection('posts');
 
 // 7.2 Remove 'insecure', add explict security rules
+//     Once server insert exists, don't allow insert here
+// 8.2 Now provide rules for edit (update) operations
 Posts.allow({
-	insert: function(userId, doc){
-		// only allow posting if you are logged in 
-		// (checks that userId is not null)
-		return !! userId;
+	update: function(userId, post) { 
+		return ownsDocument(userId, post); 
+	},
+	remove: function(userId, post) { 
+	  	return ownsDocument(userId, post); 
 	}
 });
 
