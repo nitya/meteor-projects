@@ -1,6 +1,10 @@
 // 4.1 Adding collections (but in insecure, autopublish mode)
 Posts = new Mongo.Collection('posts');
 
+// Note that when a call is made on a collection, it can go
+// forward only if any matching 'allow' calls return true
+// AND any matching 'deny' calls return false
+
 // 7.2 Remove 'insecure', add explict security rules
 //     Once server insert exists, don't allow insert here
 // 8.2 Now provide rules for edit (update) operations
@@ -10,6 +14,14 @@ Posts.allow({
 	},
 	remove: function(userId, post) { 
 	  	return ownsDocument(userId, post); 
+	}
+});
+
+// 8.3 Limit updates to only the specified fields of posts
+Posts.deny({
+	update: function(userId, post, fieldNames) {
+    // may only edit the following two fields:
+		return (_.without(fieldNames, 'url', 'title').length > 0); 
 	}
 });
 
