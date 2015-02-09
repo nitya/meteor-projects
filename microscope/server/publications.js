@@ -10,3 +10,8 @@
 Meteor.publish('posts', function(){
 	return Posts.find();
 });
+
+// 10.1 Add publication for Comments
+Meteor.publish('comments', function(){
+	return Comments.find();
+});

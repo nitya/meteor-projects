@@ -36,12 +36,13 @@ var requireLogin = function(){
 // Router.configure sets GLOBAL context, properties
 // waitOn ensures that the function specified completes before the route
 //  renders. in the meantime, a 'loading' template is shown
+// 10.1 Added subscription to comments as well
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
 	notFoundTemplate: 'notFound',
 	waitOn: function(){
-		return Meteor.subscribe('posts');
+		return [ Meteor.subscribe('posts'), Meteor.subscribe('comments')];
 	}		
 });
 
