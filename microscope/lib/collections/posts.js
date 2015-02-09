@@ -37,11 +37,24 @@ Posts.allow({
 });
 
 // 8.3 Limit updates to only the specified fields of posts
+// This will deny update if any field other than url/title exists
 Posts.deny({
-	update: function(userId, post, fieldNames) {
+	update: function(userId, post, fieldNames, modifier) {
     // may only edit the following two fields:
 		return (_.without(fieldNames, 'url', 'title').length > 0); 
 	}
+});
+
+// 9.5 Since updates happen client-side (not via method)
+//     add another deny rule for updates to handle errors
+// Note that validatePost takes the contents of the $set
+//  property, which would contain the fields being updated
+// This will deny update if url/title update has errors
+Posts.deny({
+	update: function(userId, post, fieldNames, modifier) {
+		var errors = validatePost(modifier.$set);
+		return errors.title || errors.url; 
+	}	
 });
 
 // 9.4

@@ -1,3 +1,18 @@
+
+// 9.5 handling errors
+Template.postEdit.created = function() { 
+  Session.set('postEditErrors', {});
+}
+
+Template.postEdit.helpers({ 
+  errorMessage: function(field) {
+    return Session.get('postEditErrors')[field]; 
+  },
+  errorClass: function (field) {
+    return !!Session.get('postEditErrors')[field] ? 'has-error' : '';
+  } 
+});
+
 // 8.1 Editing Posts
 //
 // 9.2 update to use throwError instead of alert
@@ -11,6 +26,11 @@ Template.postEdit.events({
       url: $(e.target).find('[name=url]').val(),
       title: $(e.target).find('[name=title]').val()
     }
+
+    // 9.5 Validate errors client side
+    var errors = validatePost(postProperties); 
+    if (errors.title || errors.url)
+      return Session.set('postEditErrors', errors);
     
     Posts.update(currentPostId, {$set: postProperties}, function(error) {
       if (error) {
@@ -32,3 +52,4 @@ Template.postEdit.events({
     }
   }
 });
+
