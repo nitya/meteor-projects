@@ -1,7 +1,17 @@
-<!-- 5.3
+<!-- 
+5.3
 Create a separate template for each post, allowing routing to details page
 based on an id (see Router update)
+
+10.1
+Add section for comments
 -->
 <template name="postPage">
   {{> postItem}}
+
+  <ul class="comments">
+    {{#each comments}}
+      {{> commentItem}}
+    {{/each}}
+  </ul>
 </template>

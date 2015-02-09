@@ -28,6 +28,9 @@
 
 	8.1
 	Add links to edit
+
+	10.2 
+	Add support for number of comments for that post
 -->
 <template name="postItem">
 
@@ -39,7 +42,12 @@
       </h3>
       <p>
         submitted by {{author}}
-        {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit</a>{{/if}}
+        <a href="{{pathFor 'postPage'}}">
+        	{{commentsCount}} comments
+        </a>
+        {{#if ownPost}}
+        	<a href="{{pathFor 'postEdit'}}">Edit</a>
+        {{/if}}
       </p>
     </div>
 
