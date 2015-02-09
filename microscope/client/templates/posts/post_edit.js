@@ -35,7 +35,8 @@ Template.postEdit.events({
     Posts.update(currentPostId, {$set: postProperties}, function(error) {
       if (error) {
         // display the error to the user
-        throwError(error.reason);
+        // 9.5 Change to use the nitya:errors package instead
+        Errors.throw(error.reason);
       } else {
         Router.go('postPage', {_id: currentPostId});
       }

@@ -10,12 +10,16 @@ making route handling and UI refreshes more efficient
 
 9.1
 Add in template for displaying errors
+
+9.5
+Change error template from {{> errors}} to {{> meteorErrors}}
+to reflect name used in the imported nitya:errors package
 -->
 <template name="layout">
   <div class="container">
   	
   	{{> header}}
-  	{{> errors}}
+  	{{> meteorErrors}}
 
     <div id="main" class="row-fluid">
 		{{> yield}}

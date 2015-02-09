@@ -42,14 +42,16 @@ Template.postSubmit.events({
 		// (callbacks return error or success status)
 		//
 		// 9.2 update to use throwError instead of alert
+		//
+		// 9.5 Update to use Errors from nitya:errors package
 		Meteor.call('postInsert', post, function(error, result){
 			// display error to the user and abort
 			if (error)	
-				return throwError(error.reason);
+				return Errors.throw(error.reason);
 
 			// 7.7 Now we can check for duplicate entry
 			if (result.postExists)
-				throwError('This link has already been posted');
+				Errors.throw('This link has already been posted');
 
 			// If new or duplicate, show page for that entry
       		Router.go('postPage', {_id: result._id});
