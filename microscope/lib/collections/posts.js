@@ -44,6 +44,20 @@ Posts.deny({
 	}
 });
 
+// 9.4
+// Validate post
+validatePost = function(post){
+	var errors = {};
+
+	if (!post.title)
+		errors.title = "Please fill in a headline";
+	if (!post.url)
+		errors.url = "Please fill in a URL";
+
+	return errors;
+}
+
+
 // 7.6 Declare postInsert method
 // Note that we are using check methods to validate data
 // Also note that Meteor.methods execute on server, so they
@@ -65,6 +79,15 @@ Meteor.methods({
 			title:String, 
 			url:String
 		});
+
+		// 9.4 SERVER SIDE VALIDATION
+		// Reuse validation if data entered directly via
+		//  server method call
+		var errors = validatePost(postAttributes); 
+		if (errors.title || errors.url)
+			throw new Meteor.Error('invalid-post', 
+				"You must set a title and URL for your post");
+
 
 		// 7.7 check for duplicate data
 		//  Note how returned object can now carry attributes that 
