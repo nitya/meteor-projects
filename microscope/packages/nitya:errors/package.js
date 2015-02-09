@@ -45,8 +45,9 @@ Package.onUse(function(api) {
 });
 
 // 9.5 Update this to configure package tests (if any)
+// 9.5.2 Updated to run tests
 Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('nitya:errors');
-  api.addFiles('nitya:errors-tests.js');
+   api.use('nitya:errors', 'client'); 
+   api.use(['tinytest', 'test-helpers'], 'client');
+   api.addFiles('errors_tests.js', 'client');
 });
