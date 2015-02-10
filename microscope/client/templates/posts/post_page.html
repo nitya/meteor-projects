@@ -5,13 +5,24 @@ based on an id (see Router update)
 
 10.1
 Add section for comments
+
+10.3 
+Add comment submission capabilty (only to logged in users)
 -->
 <template name="postPage">
-  {{> postItem}}
 
-  <ul class="comments">
-    {{#each comments}}
-      {{> commentItem}}
-    {{/each}}
-  </ul>
+	{{> postItem}}
+
+  	<ul class="comments">
+  		{{#each comments}}
+      	{{> commentItem}}
+    	{{/each}}
+  	</ul>
+
+  	{{#if currentUser}}
+    	{{> commentSubmit}}
+  	{{else}}
+    	<p>Please log in to leave a comment.</p>
+	{{/if}}
+
 </template>
