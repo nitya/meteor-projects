@@ -19,4 +19,6 @@ Meteor 1.0 compliant standard example for a production quality mobile market rea
 ```
 meteor create --example localmarket
 ```
+## Leaflet-Parties
 
+Attempt to deconstruct and reconstruct the leaflet-parties example from scratch, to learn how Leaflets works (and reuse for other map-based app projects)
