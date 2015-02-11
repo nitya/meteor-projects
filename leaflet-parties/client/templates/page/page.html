@@ -2,6 +2,18 @@
 2. Add basic template
 -->
 <template name="page">
+
+<!-- 7. Put placeholders for modal dialogs 
+anchored to this template, triggered by Session state
+-->
+  {{#if showCreateDialog}}
+    {{> createDialog}}
+  {{/if}}
+
+  {{#if showInviteDialog}}
+    {{> inviteDialog}}
+  {{/if}}
+
 	<div class="container-fluid">
 		<!-- 
 		6. Page contains a single fluid row with 
