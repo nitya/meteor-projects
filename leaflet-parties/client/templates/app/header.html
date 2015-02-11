@@ -1,7 +1,7 @@
 <!-- 
-2. Add basic template
+ 4. Moved basic template to header
 -->
-<template name="page">
+<template name="header">
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
 
@@ -26,7 +26,9 @@
         <ul class="nav navbar-nav">
           {{#if currentUser}}            
             <li> 
-              <a href="{{currentUser.profile.url}}">Hello, {{currentUser.profile.login}}</a>
+              <a href="{{currentUser.profile.url}}">
+                Hello, {{currentUser.profile.login}}
+              </a>
             </li>
           {{/if}}
         </ul>
