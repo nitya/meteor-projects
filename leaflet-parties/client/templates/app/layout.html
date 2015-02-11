@@ -5,8 +5,20 @@
 <template name="layout">
   <div class="container">
   	
+  	<!-- Header-->
   	{{> header}}
 
+  	<!-- CreateDialog modal -->
+    {{#if showCreateDialog}}
+    	{{> createDialog}}
+  	{{/if}}
+
+  	<!-- InviteDialog modal -->
+  	{{#if showInviteDialog}}
+    	{{> inviteDialog}}
+  	{{/if}}
+
+  	<!-- Main body of route-->
     <div id="main" class="row-fluid">
 		{{> yield}}
     </div>

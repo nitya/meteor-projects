@@ -54,6 +54,8 @@ var openCreateDialog = function (latlng) {
   Session.set("createCoords", latlng);
   Session.set("createError", null);
   Session.set("showCreateDialog", true);
+
+  console.log("[c/map.js] Set session vars: ",Session.keys);
 };
 
 
@@ -109,6 +111,7 @@ Template.map.rendered = function () {
     
     // must be logged in to create parties
     map.on("dblclick", function(e) {
+      console.log("[c/map.js] Got double click at: "+e.latlng);
       if (! Meteor.userId()) 
         return;
       openCreateDialog(e.latlng);

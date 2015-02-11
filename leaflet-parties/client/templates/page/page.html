@@ -6,14 +6,6 @@
 <!-- 7. Put placeholders for modal dialogs 
 anchored to this template, triggered by Session state
 -->
-  {{#if showCreateDialog}}
-    {{> createDialog}}
-  {{/if}}
-
-  {{#if showInviteDialog}}
-    {{> inviteDialog}}
-  {{/if}}
-
 	<div class="container-fluid">
 		<!-- 
 		6. Page contains a single fluid row with 
@@ -24,9 +16,9 @@ anchored to this template, triggered by Session state
 			<div class="span4">
 				{{> details}}
             	{{#if currentUser}}
-            	<div class="pagination-centered">
-              		<h4>Double click the map to post a party!</h4>
-            	</div>
+            	<h1 class="muted pagination-centered">
+              		Double click the map to post a party!
+            	</h1>
             	{{/if}}
           	</div>
           	<div class="span8">

@@ -1,8 +1,7 @@
-// Declare page template data helpers here
+// Declare layout template data helpers here
 //
-// 2. Bind page title
 // 7. Add the modal dialogs here
-Template.page.helpers({
+Template.layout.helpers({
   showInviteDialog: function(){
     return Session.get("showInviteDialog");
   },
