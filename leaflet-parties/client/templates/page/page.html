@@ -2,5 +2,24 @@
 2. Add basic template
 -->
 <template name="page">
-  <span> Page Content </span>
+	<div class="container-fluid">
+		<!-- 
+		6. Page contains a single fluid row with 
+			- party on map on right
+			- party details on left
+		-->
+		<div class="row-fluid">
+			<div class="span4">
+				{{> details}}
+            	{{#if currentUser}}
+            	<div class="pagination-centered">
+              		<h4>Double click the map to post a party!</h4>
+            	</div>
+            	{{/if}}
+          	</div>
+          	<div class="span8">
+            	{{> map}}
+          	</div>
+        </div>
+    </div>
 </template>
