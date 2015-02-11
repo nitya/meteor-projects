@@ -10,3 +10,5 @@ insecure
 mizzao:bootstrap-3
 accounts-password
 ian:accounts-ui-bootstrap-3
+accounts-github
+service-configuration

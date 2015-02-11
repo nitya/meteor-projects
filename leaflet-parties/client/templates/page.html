@@ -25,7 +25,9 @@
 
         <ul class="nav navbar-nav">
           {{#if currentUser}}            
-            <li><a href="">Add Party (TBD)</a></li>
+            <li> 
+              <a href="{{currentUser.profile.url}}">Hello, {{currentUser.profile.login}}</a>
+            </li>
           {{/if}}
         </ul>
 
