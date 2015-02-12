@@ -1,5 +1,11 @@
 // 7. Let's start working with the Map now..
 // 
+// 9. Update the initialize function
+//  - Initialize default image path
+//  - Initialize the map (identify the div, set default view)
+//  - Add a tile layer
+//  - Start adding markers
+//  See: https://github.com/bevanhunt/meteor-leaflet-demo/blob/master/client/client.js
 
 
 $(window).resize(function () {
@@ -10,7 +16,14 @@ $(window).resize(function () {
 
 var map, markers = [ ];
 
+
 var initialize = function(element, centroid, zoom, features) { 
+
+  // Step 0: Configure locations
+  L.Icon.Default.imagePath = 'packages/mrt_leaflet-0.6.4/images';
+  
+  // Step 1: Create a map in the specified 'element'
+  //         and set the view to a given lat/long 
   map = L.map(element, {
     scrollWheelZoom: false,
     doubleClickZoom: false,
@@ -18,8 +31,41 @@ var initialize = function(element, centroid, zoom, features) {
     touchZoom: false
   }).setView(new L.LatLng(centroid[0], centroid[1]), zoom);
   
-  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {opacity: .5}).addTo(map);
+  // Step 2: Add a specified tile layer 
+  //   specify the tile layer url
+  //   provide additional attributes like opacity or attribution..
+  // Docs: 
+  // http://leaflet-extras.github.io/leaflet-providers/preview/
+  // https://gist.github.com/mourner/1804938
+  // https://github.com/leaflet-extras/leaflet-providers
+  // Here is the stamen watercolor layer 
+  var Stamen_Watercolor = L.tileLayer(
+    'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+    //attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    subdomains: 'abcd',
+    minZoom: 1,
+    maxZoom: 16
+  });
+  Stamen_Watercolor.addTo(map);
 
+  // Step 3: Add attribution separately (after clearing default)
+  map.attributionControl.setPrefix('');
+  var attribution = new L.Control.Attribution();
+  attribution.addAttribution('Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>');
+  map.addControl(attribution);
+
+  /*
+
+  // Here it is the stamen toned layer
+  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {opacity: .5})
+   .addTo(map);
+
+  // Here is the OpenStreetMap layer
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+  // Step 3: Add attribution caption to Map - if set up separately
   map.attributionControl.setPrefix('');
   
 	var attribution = new L.Control.Attribution();
@@ -28,7 +74,15 @@ var initialize = function(element, centroid, zoom, features) {
   attribution.addAttribution("Data by <a href='http://openstreetmap.org'>OpenStreetMap</a> under <a href='http://creativecommons.org/licenses/by-sa/3.0'>CC BY SA</a>.");
   
   map.addControl(attribution);
+  */
+
+  // Step 4: Add markers
+  L.marker([ 40.752998, -73.977056 ])
+  .addTo(map)
+  .bindPopup('Grand Central Station FTW')
+  .openPopup();
 }
+
 
 var addMarker = function(marker) {
   map.addLayer(marker);
